@@ -18,7 +18,6 @@ $timestep = 60;
 require "ModelHelper.php";
 $data = new ModelHelper($emoncms_dir,$model_start,$timestep);
 $data->input_feed("model:outsideT",0.1);
-$data->output_feed("model:outsideT2");
 $data->output_feed("model:roomT");
 $data->output_feed("model:heat");
 
@@ -232,7 +231,6 @@ while(true)
     $room_t_sum += $room_t;
 
     // Write output to output feeds
-    $data->write("model:outsideT2",$outside);
     $data->write("model:roomT",$room_t);
     $data->write("model:heat",$heat_output);
 

@@ -14,7 +14,6 @@ $timestep = 60;
 require "ModelHelper.php";
 $data = new ModelHelper($emoncms_dir,$model_start,$timestep);
 $data->input_feed("model:outsideT",0.1);
-$data->output_feed("model:output");
 $data->output_feed("model:heat");
 
 $outside_sum = 0;
@@ -38,7 +37,6 @@ while(true)
     $heatloss_sum += $heatloss;
     
     // Write output to output feed  
-    $data->write("model:output",$outside);
     $data->write("model:heat",$heatloss);
     
     $itterations ++;

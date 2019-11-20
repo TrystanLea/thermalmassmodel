@@ -17,9 +17,8 @@ $timestep = 60;
 
 require "ModelHelper.php";
 $data = new ModelHelper($emoncms_dir,$model_start,$timestep);
-$data->input_feed("model:solar",0.1);
+$data->input_feed("model:solar2",0.1);
 $data->input_feed("model:outsideT",0.1);
-$data->output_feed("model:outsideT2");
 $data->output_feed("model:roomT");
 $data->output_feed("model:heat");
 
@@ -214,7 +213,7 @@ while(true)
     // Load dataset
     // ------------------------------------------------------------------------------
     $outside = $data->read("model:outsideT",$time);
-    $solar = $data->read("model:solar",$time) / 2800.0;
+    $solar = $data->read("model:solar2",$time) / 3750.0;
     if ($solar<0) $solar = 0;
     
     // ------------------------------------------------------------------------------
@@ -323,7 +322,6 @@ while(true)
     $room_t_sum += $room_t;
 
     // Write output to output feeds
-    $data->write("model:outsideT2",$outside);
     $data->write("model:roomT",$room_t);
     $data->write("model:heat",$heat_output);
 
